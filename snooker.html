@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Snooker scoring</title>
+        <link rel="stylesheet" type="text/css" href="snooker.css">
+    </head>
+    <body>
+        <div id="app">
+            <div class="table">
+                <div class="row"><div class="player" :class="{activePlayer: isActive}">PLAYER1</div></div>
+                <div class="row"><div class="frames">{{player1FramesWon}}</div></div>
+                <div class="row"><div class="points">{{player1Points}}</div></div>
+                <div class="row"><div class="break">{{player1Break}}</div></div>
+                <div class="h">Breaks >= 50:<div v-for="break1 in history1Break">{{break1}}</div></div>
+            </div> <!--table-->
+            <div class="table">
+                <div class="row"><div class="cell">vs</div></div>
+                <div class="row"><div class="cell">frames</div></div>
+                <div class="row"><div class="cell">points</div></div>
+                <div class="row"><div class="cell">break</div></div>
+                <div class="row"><div class="cell1">Difference: {{difference}}</div></div>
+                <div class="row"><div class="cell1">Points on table: {{pointsOnTable}}</div></div>
+                <!--history-->
+                <div class="row"><div class="cell1">History: 
+                    <table class="t">
+                        <tr><th class="hist">frame#</th><th class="hist">pl1:</th><th class="hist">pl2:</th></tr>
+                            <tr v-show="i!=0" v-for="(p, i) in history"><td class="hist">{{i}}</td><td class="hist">{{p.p1}}</td><td class="hist">{{p.p2}}</div></td></tr>
+                    </table>
+                </div></div> <!--history-->
+            </div> <!--table-->
+            <div class="table">
+                <div class="row"><div class="player" :class="{activePlayer: !isActive}">PLAYER2</div></div>
+                <div class="row"><div class="frames">{{player2FramesWon}}</div></div>
+                <div class="row"><div class="points">{{player2Points}}</div></div>
+                <div class="row"><div class="break">{{player2Break}}</div></div>
+                <div class="h">Breaks >= 50:<div v-for="break2 in history2Break">{{break2}}</div></div>
+            </div> <!--table-->
+            <div class="table">
+                <div class="row"><div class="scoring">SCORING</div></div>
+                <!--<div class="row"><button class="clear" v-on:Click="clear()">CLEAR</button></div>-->
+                <div class="row"><button class="change" v-on:Click="changePlayer()">Change Player</button></div>
+                <div class="row"><button class="add" v-on:Click="addFrame()">Add Frame</button></div>
+                <div class="row">
+                    <button class="redBall" v-on:Click="addPointsToBreak(1)" :disabled="!redsOnTableFlag">red</button>
+                    <button class="foul" v-on:Click="foul(4)">Foul 4</button>
+                </div>
+                <div class="row">
+                    <button class="yellowBall" v-on:Click="addPointsToBreak(2)" :disabled="!yellow">yellow</button>
+                    <button class="foul" v-on:Click="foul(5)">Foul 5</button>
+                </div>
+                <div class="row">
+                    <button class="greenBall" v-on:Click="addPointsToBreak(3)" :disabled="!green">green</button>
+                    <button class="foul" v-on:Click="foul(6)">Foul 6</button>
+                </div>
+                <div class="row">
+                    <button class="brownBall" v-on:Click="addPointsToBreak(4)" :disabled="!brown">brown</button>
+                    <button class="foul" v-on:Click="foul(7)">Foul 7</button>
+                </div>
+                <div class="row">
+                    <button class="blueBall" v-on:Click="addPointsToBreak(5)" :disabled="!blue">blue</button>
+                    <button class="free" v-on:Click="freeBall()">Free ball</button>
+                </div>
+                <div class="row">
+                    <button class="pinkBall" v-on:Click="addPointsToBreak(6)" :disabled="!pink">pink</button>
+                </div>
+                <div class="row">
+                    <button class="blackBall" v-on:Click="addPointsToBreak(7)" :disabled="!black">black</button>
+                </div>
+            </div> <!--table-->
+        </div> <!--app-->
+
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="snooker.js"></script>
+    </body>
+</html>
